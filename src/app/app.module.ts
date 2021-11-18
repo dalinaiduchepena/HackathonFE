@@ -8,11 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BentoModule } from '@bento/bento-ng';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SchemeDetailsComponent } from './scheme-details/scheme-details.component';
+import { RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SchemeDetailsComponent
+    SchemeDetailsComponent,
+    DashboardComponent
   ],
   imports: [
     BentoModule,
@@ -21,6 +24,7 @@ import { SchemeDetailsComponent } from './scheme-details/scheme-details.componen
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    RouterModule,
     FormsModule
   ],
   providers: [],

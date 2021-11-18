@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BentoComboboxOptions, BentoWizardComponentEvent } from '@bento/bento-ng';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SchemeDetails } from './schemedetails';
+import { SchemedetailsService } from './schemedetails.service';
+import { SchemeInfo, schemeModel } from './schemeinfo';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +14,13 @@ export class AppComponent implements OnInit {
 
   public schemeDetails:SchemeDetails=new SchemeDetails();
 
+  public searchText:string="";
+  public isChecked:boolean=false;
   public ngOnInit() {
-   
   }
   public output:number=0;
   public schemetype:number=1;
-  title = 'SparkHackathon-Welfare-FE';
+  title = 'Welfare Scheme';
 
   public dataStream: Observable<any[]>;
   public comboboxOptions: BentoComboboxOptions = {
@@ -32,7 +35,7 @@ export class AppComponent implements OnInit {
    */
   public selectedRow: any;
 
-  constructor() {
+  constructor(private schemeInfo:SchemedetailsService) {
     const states = [
       'Andhra Pradesh',
       'Arunachal Pradesh',
@@ -46,12 +49,47 @@ export class AppComponent implements OnInit {
     this.dataStream = new BehaviorSubject(states) as Observable<any[]>;
   }
 
+
+
   onCurrentStepChanging(event: BentoWizardComponentEvent) {
     this.output = event.step ;
-
-    var childDivs = document.getElementById('schemeCategories')?.getElementsByTagName('bento-checkbox');
+    this.schemeDetails.schemeCatagerioes="";
+    this.schemeDetails.documentsRequired="";
+    const schemeCatcontrols = document?.getElementById('schemeCategories')?.getElementsByTagName('input');
     
-
-
+    if(schemeCatcontrols) {
+    for(let i=0; i < schemeCatcontrols?.length; i++) {
+      if(schemeCatcontrols[i].checked)
+      {
+        this.schemeDetails.schemeCatagerioes += `${schemeCatcontrols[i].name},`;
+      }
+    }
   }
+
+  const docsreqcontrols = document?.getElementById('docsreq')?.getElementsByTagName('input');
+    
+    if(docsreqcontrols) {
+    for(let i=0; i < docsreqcontrols?.length; i++) {
+      if(docsreqcontrols[i].checked)
+      {
+        this.schemeDetails.documentsRequired += `${docsreqcontrols[i].name},`;
+      }
+    }
+  }
+  }
+
+  public schemeURL:string="";
+  public schemeInformation:SchemeInfo[]=[];
+  public schemeModel:any;
+
+  getSchemeInfo() {
+    this.schemeInfo.getSchemeInfo()
+    .subscribe((data)=>{
+      this.schemeModel = data;
+      this.schemeInformation=this.schemeModel.model;
+      
+    })  
+  }
+
+
 }

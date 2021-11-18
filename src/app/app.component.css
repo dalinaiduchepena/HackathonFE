@@ -1,0 +1,25 @@
+input[type='checkbox'] {
+    width:15px;
+    height:15px;
+    background:white;
+    border:2px solid #555;
+}
+/* input[type='checkbox']:checked {
+    background: #abd;
+} */
+
+#docsreq {
+    white-space: nowrap;
+}
+
+#docsreq label {
+   padding-left: 0.4em;
+}
+
+#schemeCategories {
+    white-space: nowrap;
+}
+
+#schemeCategories label {
+   padding-left: 0.4em;
+}

@@ -3,8 +3,8 @@ export class SchemeDetails {
     state:string="";
     schemeDescription:string="";
     schemeWebLink:string="";
-    age:number=0;
-    annualIncome:number=0;
+    age:string="";
+    annualIncome:string="";
     profession:string="";
     gender:string="";
     schemeCatagerioes:string="";

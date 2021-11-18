@@ -1,1 +1,177 @@
-<p>scheme-details works!</p>
+<div style="margin-left: 300px;width: 900px;margin-top: 20px;">
+    <bento-wizard [hTag]="'h1'" (currentStepChanging)="onCurrentStepChanging($event)" >
+      <!-- Definition and content of a Bento Wizard -->
+      <bento-wizard-step
+        [title]="'Scheme details'"
+        description="Enter scheme information"
+      >
+        <h1>Enter scheme details</h1>
+        <div class="employerForm">
+          <div >
+              <label style="margin-top: 35px;font-weight: bold; margin-right: 40px;margin-bottom: 35px;" for="uniqueId">Scheme Name</label>
+              <input type="text" style="width: 300px;" [(ngModel)]="schemeDetails.schemeName" id="uniqueId" name="uniqueId" />
+          </div>
+          <div class="form-group" style="margin-left: -7px;" >
+              <input type="radio" id="state" name="schemetype"  [(ngModel)]="schemetype" value="0">
+              <label for="html">State scheme</label>
+              <input type="radio" id="central" name="schemetype"  [(ngModel)]="schemetype" value="1">
+              <label for="css">Central scheme</label>
+          </div>
+          <div style="width: 300px;margin-bottom: 20px;" *ngIf="schemetype == 0">
+            <bento-combobox
+            id="custom-template-combobox"
+            [options]="comboboxOptions"
+            [(ngModel)]="schemeDetails.state"
+            [itemsObservable]="dataStream"
+          ></bento-combobox>
+          </div>
+          <div >
+            <label style="font-weight: bold;margin-right: 10px;" for="uniqueId">Scheme Description</label>
+            <textarea style="width: 500px;height: 90px;" id="uniqueId" [(ngModel)]="schemeDetails.schemeDescription" name="uniqueId"></textarea>
+        </div>
+        <div >
+          <label style="margin-top: 36px;font-weight: bold;margin-right: 32px;" for="uniqueId">Scheme Weblink</label>
+          <input type="text" style="width: 300px;" [(ngModel)]="schemeDetails.schemeWebLink" id="uniqueId" name="uniqueId" />
+      </div>
+        </div>
+      </bento-wizard-step>
+      <bento-wizard-step [title]="'Eligibility'" description="Provide Beneficiaries criteria">
+        <h1>Enter beneficiaries eligibility criteria</h1>
+        <div >
+          <label style="margin-top: 20px;font-weight: bold; margin-right: 143px;" for="uniqueId">Age</label>
+          <input type="text" style="width: 300px;" [(ngModel)]="schemeDetails.age" id="uniqueId" name="uniqueId" />
+      </div>
+      <div >
+        <label style="margin-top: 20px;font-weight: bold; margin-right: 70px;" for="uniqueId">Annual Income</label>
+        <input type="text" style="width: 300px;" [(ngModel)]="schemeDetails.annualIncome" id="uniqueId" name="uniqueId" />
+      </div>
+      <div >
+        <label style="margin-top: 20px;font-weight: bold; margin-right: 100px;" for="uniqueId">Profession</label>
+        <input type="text" style="width: 300px;" [(ngModel)]="schemeDetails.profession" id="uniqueId" name="uniqueId" />
+    </div>
+    <div class="form-group" style="margin-right: 100px;" >
+      <label style="margin-top: 10px;font-weight: bold; margin-right: 110px;" for="uniqueId">Gender</label>
+        <input type="radio" id="html" name="fav_language"  [(ngModel)]="schemeDetails.gender" value="0">
+        <label style="margin-left: -9px;" for="html">Male</label>
+        <input type="radio" id="css" name="fav_language"  [(ngModel)]="schemeDetails.gender" value="1">
+        <label style="margin-left: -9px;margin-right: 9px;" for="css">Female</label>
+        <input type="radio" id="html" name="fav_language"  [(ngModel)]="schemeDetails.gender" value="2">
+        <label style="margin-left: -9px;" for="html">Others</label>
+        <input type="radio" id="css" name="fav_language"  [(ngModel)]="schemeDetails.gender" value="3">
+        <label style="margin-left: -9px;" for="css">NA</label>
+    </div>
+    <div id="schemeCategories">
+      <label style="font-weight: bold; margin-right: 40px;" for="uniqueId">Scheme Categories</label>
+       <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html" style="margin-right: 30px;">Disability</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html" style="margin-right: 56px;" >Senior citizen</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html">Pregnant women</label> <br>
+      <div style="margin-left: 170px;">
+       <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html" style="margin-right: 33px;">Orphans</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html" style="margin-right: 103px;">Urban</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html">Rural</label></div>
+      <div style="margin-left: 170px;">
+         <bento-checkbox
+          id="my-checkbox"
+        ></bento-checkbox>
+        <label for="html" style="margin-right: 43px;">Widow</label>
+        <bento-checkbox
+          id="my-checkbox"
+        ></bento-checkbox>
+        <label for="html" style="margin-right: 30px;">Below Poverty line</label>
+        <bento-checkbox
+          id="my-checkbox"
+        ></bento-checkbox>
+        <label for="html">Unemployed</label></div>
+        <div style="margin-left: 170px;">
+          <bento-checkbox
+            id="my-checkbox"
+          ></bento-checkbox>
+         <label for="html">Others</label></div>
+    
+    </div>
+    
+    <div >
+      <label style="margin-top: 35px;font-weight: bold; margin-right: 40px;" for="uniqueId">Scheme Categories</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html" style="margin-right: 28px;">Ration Card</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html" style="margin-right: 20px;">Residential proof</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html">Income proof</label> <br>
+      <div style="margin-left: 170px;">
+       <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html" style="margin-right: 20px;">Bank account</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html" style="margin-right: 45px;">Aadhar card</label>
+      <bento-checkbox
+        id="my-checkbox"
+      ></bento-checkbox>
+      <label for="html">Others</label></div>
+    
+    </div>
+      </bento-wizard-step>
+      <bento-wizard-step [title]="'Verify'" description="Check scheme details and submit">
+        <h1>Verify scheme information</h1>
+        <div>
+          <label style="margin-right: 100px;" for="html">Scheme Name</label>
+          <label for="html">{{schemeDetails.schemeName}}</label>
+        </div>
+        <div>
+          <label style="margin-right: 36px;" for="html">State/Central Governemt</label>
+          <label for="html">{{schemeDetails.state}}</label>
+        </div>
+        <div >
+          <div style="margin-right: 65px;float:left;" for="html">Scheme Description</div>
+          <div style="word-wrap: break-word;width: 600px;float:left;">{{schemeDetails.schemeDescription}}</div>
+        </div>
+        <div>
+          <label style="margin-right: 67px;" for="html">Scheme Weblink</label>
+          <label  for="html">{{schemeDetails.schemeWebLink}}</label>
+        </div>
+        <div>
+          <label style="margin-right: 62px;" for="html">Schemes Categories</label>
+          <label for="html">Disability, Senior Citizen, Widow</label>
+        </div>
+        <div>
+          <label style="margin-right: 67px;" for="html">Documents required</label>
+          <label for="html">Ration card, Residential Proof, Bank Account , Aadhar card</label>
+        </div>
+      </bento-wizard-step>
+      <bento-wizard-custom-button-group>    
+        <!-- (click)="onCustomButtonClick('Right')" -->
+        <button *ngIf="output == 2"
+          class="btn btn-outline-primary float-right bento-wizard-custom-button-secondary"
+        >
+          <span class="btn-text">Submit</span>
+        </button>
+      </bento-wizard-custom-button-group>
+     </bento-wizard>
+    </div>
